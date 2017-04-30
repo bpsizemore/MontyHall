@@ -1,3 +1,4 @@
+import sys
 from random import randint
 
 def test_hall():
@@ -20,18 +21,25 @@ def test_hall():
 
 def main():
 
-    # do one thousand trials and record results
+    # First argument is number of trials, otherwise default to 1000
+    print(sys.argv)
+    if len(sys.argv) >= 2:
+        trials = int(sys.argv[1])
+    else:
+        trials = 1000
+
     success = 0
     failure = 0
-    for i in range(1000):
+    for i in range(trials):
         result = test_hall()
         if result:
             success += 1
         else:
             failure += 1
 
-    print(str(success) + " successes")
-    print(str(failure) + " failures")
+    # win percentage is success divided by total.
+    percent = success / (success + failure)
+    print("Win percentage when swapping: " + str(percent))
 if __name__ == "__main__":
 
     main()
